@@ -1,0 +1,598 @@
+@import "var";
+@import "rules";
+@import "base";
+
+// Startline Styling
+header {
+   position: relative;
+   .page {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+
+      hr {
+         width: 100%;
+         margin: 0 2em;
+         border-color: $theme1;
+      }
+
+      p {
+         white-space: nowrap;
+         &.num {
+            font-size: $t3;
+            font-weight: $big;
+            color: $theme1;
+         }
+      }
+   }
+
+   .content {
+      display: grid;
+      @include media(min, width, 841px) {
+         @include grid(2, 2em);
+      }
+      width: 100%;
+      position: relative;
+
+      .bg {
+         position: absolute;
+         width: 100%;
+         height: 100%;
+         z-index: -1;
+         opacity: 0.2;
+         img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+         }
+      }
+   }
+
+   .info {
+      @include flex(column, flex-start, center);
+      @include media(max, width, 840px) {
+         align-items: center;
+      }
+      padding: 2em;
+      * {
+         margin: 0;
+      }
+
+      h2 {
+         font-size: $c9;
+         background: $theme1;
+         color: $c10;
+         padding: 5px 10px;
+         font-size: $t3;
+      }
+
+      h1 {
+         font-size: $t1;
+         text-transform: uppercase;
+      }
+
+      .tagline {
+         font-size: $t4;
+         margin-top: 1em;
+      }
+   }
+
+   .thumb {
+      height: 720px;
+      background: $theme1;
+      background: linear-gradient(0deg, rgba($theme1, 0.45), rgba($theme1, 0));
+      @include flex(row, flex-end, center);
+      .photo {
+         width: 100%;
+         height: 85%;
+         img {
+            width: 100%;
+            max-width: auto;
+            height: 100%;
+            object-fit: contain;
+         }
+      }
+   }
+
+   .group-arrow {
+      @include flex(column, center, center);
+      position: absolute;
+      z-index: -1;
+
+      &.left {
+         top: 10%;
+         left: -0.5em;
+      }
+
+      &.right {
+         bottom: 10%;
+         right: -0.5em;
+      }
+
+      @keyframes move-down {
+         0% {
+            transform: translateY(0);
+         }
+
+         50% {
+            transform: translateY(2em);
+         }
+
+         100% {
+            transform: translateY(0);
+         }
+      }
+
+      .arrow {
+         width: 50px;
+         height: 50px;
+         content: "";
+         background: $c0;
+         margin-bottom: 2em;
+         clip-path: polygon(50% 40%, 100% 0, 100% 60%, 50% 100%, 0 60%, 0 0);
+         animation: move-down ease 2s infinite;
+
+         @for $i from 1 to 6 {
+            &:nth-child(#{$i}) {
+               animation-delay: #{$i/10}s;
+            }
+         }
+      }
+   }
+}
+
+nav {
+   margin: 4em 0;
+   position: sticky;
+   top: -1px;
+   z-index: $nav;
+   .grid {
+      @include flex(row, center, space-around);
+      flex-wrap: wrap;
+      background: $theme1;
+      .menu {
+         padding: 10px;
+         .list {
+            color: $c10;
+            text-transform: uppercase;
+            padding: 5px 0 5px 2em;
+            margin-right: 2em;
+            font-weight: $big;
+            font-size: $t5;
+            @include media(min, width, 841px) {
+               &:not(:first-child) {
+                  border-left: 1px solid $c10;
+               }
+            }
+         }
+      }
+
+      .sosmed {
+         @include flex(row, center, center);
+         flex-wrap: wrap;
+
+         .item {
+            width: 25px;
+            height: 25px;
+            background: $c10;
+            margin-left: 10px;
+            @include flex(row, center, center);
+            i {
+               color: $c0;
+               font-size: $t5;
+            }
+         }
+
+         @include media(max, width, 840px) {
+            margin-bottom: 1em;
+         }
+      }
+   }
+}
+
+.intro {
+   margin: 0 0 4rem;
+   .page {
+      @include flex(row, center, center);
+      max-width: 175px;
+      font-weight: $med;
+      hr {
+         width: 100%;
+         margin: 1em;
+      }
+   }
+
+   .bond {
+      padding: 0 2vw;
+      @include media(min, width, 841px) {
+         padding: 0 4rem;
+         & > div {
+            max-width: 60%;
+            width: 100%;
+         }
+      }
+   }
+
+   .video {
+      aspect-ratio: 16/9;
+      margin: 0 0 0 auto;
+      position: relative;
+      &::after {
+         width: 100px;
+         height: 100px;
+         background: $theme1;
+         content: "";
+         position: absolute;
+         top: -2em;
+         right: -2em;
+         z-index: -1;
+      }
+      iframe {
+         width: 100%;
+         height: 100%;
+      }
+   }
+
+   .info {
+      background: darken($c9, 5%);
+      padding: 3vw 2em;
+      position: relative;
+      h1 {
+         font-size: $t1;
+         margin: 0;
+         color: $theme1;
+         font-style: italic;
+         @include media(min, width, 841px) {
+            position: absolute;
+            top: -0.5em;
+            left: -1em;
+         }
+      }
+
+      p {
+         font-size: $t5;
+         line-height: $t5 * 1.618;
+
+         &.tagline {
+            font-weight: $med;
+            font-size: $t4;
+         }
+      }
+
+      .cta {
+         background: $theme1;
+         color: $c10;
+         padding: 10px 0 10px 2em;
+         position: absolute;
+         right: -2em;
+         bottom: -1em;
+         white-space: nowrap;
+         font-size: $t4;
+         font-weight: $med;
+         text-transform: uppercase;
+         @extend .row;
+         @extend .trans;
+         i {
+            font-size: $t4;
+            margin-right: 10px;
+         }
+         hr {
+            width: 50px;
+            margin-left: 1em;
+            border-color: $c10;
+            @extend .trans;
+         }
+
+         &:hover {
+            background: $c0;
+            hr {
+               width: 75px;
+            }
+         }
+      }
+   }
+}
+
+.portofolio {
+   margin: 0 0 8rem;
+   .page {
+      @extend .row;
+      position: relative;
+      h2 {
+         position: absolute;
+         font-size: $t1;
+         opacity: 0.3;
+         color: $theme1;
+         z-index: -1;
+         transform: scale(2);
+      }
+      h1 {
+         font-size: $t3;
+         margin: 0;
+      }
+   }
+
+   .split {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 2em;
+
+      .list {
+         aspect-ratio: 9/16;
+         img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+         }
+
+         @for $i from 2 to 4 {
+            &:nth-child(#{$i}) {
+               transform: translateY(2rem * $i);
+            }
+         }
+      }
+   }
+}
+
+.skill {
+   .page {
+      @extend .row;
+      hr {
+         width: 100%;
+         margin: 0 2em;
+      }
+      h1 {
+         white-space: nowrap;
+         font-size: $t2;
+      }
+   }
+
+   .split {
+      .item {
+         background: $c9;
+         background: linear-gradient(90deg, $c8, $c9);
+         padding: 1em 2em;
+         font-size: $t4;
+         font-weight: $med;
+         text-transform: uppercase;
+         text-align: center;
+      }
+
+      @include media(min, width, 841px) {
+         @include grid(4, 2em);
+      }
+
+      @include media(max, width, 840px) {
+         .item {
+            margin: 0 0 1rem;
+         }
+      }
+   }
+}
+
+.experience {
+   margin: 4rem 0 0;
+   .banner {
+      height: 450px;
+      @extend .row;
+
+      .caption {
+         position: absolute;
+         z-index: 1;
+         h1 {
+            margin: 0;
+            font-size: $t1;
+            position: relative;
+            text-shadow: 0 0 10px $c10;
+            &::after {
+               background: $theme1;
+               width: 50%;
+               height: 50%;
+               content: "";
+               position: absolute;
+               bottom: 0;
+               right: -10%;
+               z-index: -1;
+            }
+         }
+      }
+
+      img {
+         filter: grayscale(1) brightness(0.2) contrast(0.85);
+         @extend .img;
+      }
+   }
+
+   .timeline {
+      position: relative;
+      &::before {
+         width: auto;
+         height: 100%;
+         border: 1px dashed $theme1;
+         content: "";
+         position: absolute;
+         left: 50%;
+         transform: translateX(-50%);
+      }
+      .box {
+         width: 100%;
+         padding: 2em;
+         position: relative;
+         .bg {
+            background: $c9;
+            padding: 1em;
+         }
+         .caption {
+            @extend .row;
+            justify-content: space-between;
+            h3 {
+               margin: 0;
+               font-weight: $med;
+            }
+         }
+
+         @for $i from 1 to 5 {
+            &:nth-child(#{$i}) {
+               .bg {
+                  background: darken($c6, 10% * $i);
+                  color: $c0;
+               }
+
+               &::after {
+                  background: darken($c5, 10% * $i);
+               }
+            }
+         }
+
+         @include media(min, width, 841px) {
+            max-width: 50%;
+            &::after {
+               width: 20px;
+               height: 20px;
+               border-radius: 50%;
+               content: "";
+               background: $c0;
+               position: absolute;
+
+               top: 50%;
+               transform: translateY(-50%);
+            }
+
+            &:nth-child(odd) {
+               &::after {
+                  right: -10px;
+               }
+            }
+
+            &:nth-child(even) {
+               margin: -8rem 0 0 auto;
+               &::after {
+                  left: -10px;
+               }
+            }
+         }
+      }
+
+      img {
+         @extend .img;
+      }
+   }
+}
+
+.contact {
+   padding: 4rem 0;
+   .form {
+      @include media(min, width, 841px) {
+         @include grid(2, 2em);
+      }
+   }
+
+   .maps {
+      position: relative;
+      padding: 2rem;
+      iframe {
+         width: 100%;
+         height: 100%;
+         min-height: 350px;
+      }
+
+      &::before {
+         width: 50%;
+         height: 15%;
+         content: "";
+         position: absolute;
+         background: $theme1;
+         top: 0;
+         left: 0;
+         z-index: -1;
+      }
+   }
+
+   form {
+      h1 {
+         font-size: $t3;
+         margin: 0;
+      }
+      hr {
+         width: 10%;
+         margin: 10px 0;
+         border-color: $theme1;
+      }
+      p {
+         color: $c4;
+         margin: 0 0 2rem;
+      }
+
+      .input {
+         width: 100%;
+         padding: 10px 2em;
+         background: transparent;
+         border: 1px solid $c7;
+         margin: 0 0 2em;
+         font-family: $font;
+         font-size: $t5;
+      }
+
+      textarea {
+         height: 150px;
+         margin-bottom: 2rem;
+      }
+
+      .cta {
+         width: 100%;
+         padding: 10px 2em;
+         text-align: center;
+         background: $theme1;
+         border: 1px solid $theme1;
+         font-size: $t4;
+         font-weight: $med;
+         @extend .trans;
+         cursor: pointer;
+
+         &:hover {
+            background: $c0;
+         }
+      }
+   }
+
+   .info {
+      margin: 2em 0;
+      @include media(min, width, 841px) {
+         @include grid(3, 2em);
+         place-items: center;
+      }
+
+      .item {
+         @extend .row;
+         @include media(max, width, 840px) {
+            justify-content: flex-start;
+            margin: 0 0 2rem;
+         }
+         i {
+            font-size: $t2;
+            margin-right: 1em;
+         }
+
+         h3 {
+            font-size: $t5;
+            margin: 0;
+         }
+         p {
+            margin: 0;
+         }
+      }
+   }
+}
+
+footer {
+   text-align: center;
+   padding: 1em 2em;
+   border-top: 1px solid $c0;
+   color: $c5;
+
+   .link {
+      color: $c0;
+      font-weight: $med;
+   }
+}

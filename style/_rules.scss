@@ -1,0 +1,19 @@
+// ----- Starline Rules
+@mixin flex($flow, $align, $justify) {
+   display: flex;
+   flex-direction: $flow;
+   align-items: $align;
+   justify-content: $justify;
+}
+
+@mixin grid($total, $gap) {
+   display: grid;
+   grid-template-columns: repeat($total, 1fr);
+   grid-gap: $gap;
+}
+
+@mixin media($rule, $leght, $val) {
+   @media (#{$rule}-#{$leght}: $val) {
+      @content;
+   }
+}
